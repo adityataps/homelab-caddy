@@ -2,6 +2,8 @@
 ### Caddyfile for reverse proxying ###
 ######################################
 
+# TODO: Verify default ports
+
 ### Hardware ##########
 
 # Gateway (Wired router)
@@ -23,12 +25,15 @@ switch.homelab.local {
 
 # Proxmox VE
 pve.homelab.local {
-    reverse_proxy {$PVE_IP}:{$PVE_PORT}
+    reverse_proxy {$PVE_IP}:{$PVE_PORT:8006}
 }
 
 # Unraid NAS
 unraid.homelab.local {
-    reverse_proxy {$UNRAID_IP}:{$UNRAID_PORT}
+    reverse_proxy {$UNRAID_IP}:{$UNRAID_PORT:443}
+
+    # Alternatively: uncomment to use Unraid's built-in reverse proxy:
+    # reverse_proxy {$UNRAID_HOSTNAME}
 }
 
 ### PVE LXCs ##########
@@ -40,7 +45,7 @@ wireguard.homelab.local {
 
 # Omada Controller
 omada.homelab.local {
-    reverse_proxy {$OMADA_IP}:{$OMADA_PORT}
+    reverse_proxy {$OMADA_IP}:{$OMADA_PORT:8043}
 }
 
 # Unbound DNS
@@ -50,13 +55,13 @@ unbound.homelab.local {
 
 # PiHole
 pihole.homelab.local {
-    reverse_proxy {$PIHOLE_IP}:{$PIHOLE_PORT}
+    reverse_proxy {$PIHOLE_IP}:{$PIHOLE_PORT:80}
 }
 
-# Caddy
-caddy.homelab.local {
-    reverse_proxy {$CADDY_IP}:{$CADDY_PORT}
-}
+## Caddy
+#caddy.homelab.local {
+#    reverse_proxy {$CADDY_IP}:{$CADDY_PORT}
+#}
 
 # SABnzbd
 sabnzbd.homelab.local {
@@ -80,7 +85,7 @@ homepage.homelab.local {
 
 # Home Assistant
 homeassistant.homelab.local {
-    reverse_proxy {$HOMEASSISTANT_IP}:{$HOMEASSISTANT_PORT}
+    reverse_proxy {$HOMEASSISTANT_IP}:{$HOMEASSISTANT_PORT:8123}
 }
 
 # Hoarder
@@ -100,37 +105,37 @@ lazylibrarian.homelab.local {
 
 # Jellyfin
 jellyfin.homelab.local {
-    reverse_proxy {$JELLYFIN_IP}:{$JELLYFIN_PORT}
+    reverse_proxy {$JELLYFIN_IP}:{$JELLYFIN_PORT:8920}
 }
 
 # Prowlarr
 prowlarr.homelab.local {
-    reverse_proxy {$PROWLARR_IP}:{$PROWLARR_PORT}
+    reverse_proxy {$PROWLARR_IP}:{$PROWLARR_PORT:9696}
 }
 
 # Jellyseerr
 jellyseerr.homelab.local {
-    reverse_proxy {$JELLYSEERR_IP}:{$JELLYSEERR_PORT}
+    reverse_proxy {$JELLYSEERR_IP}:{$JELLYSEERR_PORT:5055}
 }
 
 # Radarr
 radarr.homelab.local {
-    reverse_proxy {$RADARR_IP}:{$RADARR_PORT}
+    reverse_proxy {$RADARR_IP}:{$RADARR_PORT:7878}
 }
 
 # Sonarr
 sonarr.homelab.local {
-    reverse_proxy {$SONARR_IP}:{$SONARR_PORT}
+    reverse_proxy {$SONARR_IP}:{$SONARR_PORT:8989}
 }
 
 # Bazarr
 bazarr.homelab.local {
-    reverse_proxy {$BAZARR_IP}:{$BAZARR_PORT}
+    reverse_proxy {$BAZARR_IP}:{$BAZARR_PORT:6767}
 }
 
 # Lidarr
 lidarr.homelab.local {
-    reverse_proxy {$LIDARR_IP}:{$LIDARR_PORT}
+    reverse_proxy {$LIDARR_IP}:{$LIDARR_PORT:8686}
 }
 
 # Whisparr

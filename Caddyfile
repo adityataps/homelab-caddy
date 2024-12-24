@@ -1,0 +1,139 @@
+######################################
+### Caddyfile for reverse proxying ###
+######################################
+
+### Hardware ##########
+
+# Gateway (Wired router)
+gateway.homelab.local {
+    reverse_proxy {$GATEWAY_IP}
+}
+
+# Access point (Wi-Fi router)
+wireless.homelab.local {
+    reverse_proxy {$WIRELESS_IP}
+}
+
+# Server rack managed switch
+switch.homelab.local {
+    reverse_proxy {$SWITCH_IP}
+}
+
+### Servers ##########
+
+# Proxmox VE
+pve.homelab.local {
+    reverse_proxy {$PVE_IP}:{$PVE_PORT}
+}
+
+# Unraid NAS
+unraid.homelab.local {
+    reverse_proxy {$UNRAID_IP}:{$UNRAID_PORT}
+}
+
+### PVE LXCs ##########
+
+# Wireguard
+wireguard.homelab.local {
+    reverse_proxy {$WIREGUARD_IP}:{$WIREGUARD_PORT}
+}
+
+# Omada Controller
+omada.homelab.local {
+    reverse_proxy {$OMADA_IP}:{$OMADA_PORT}
+}
+
+# Unbound DNS
+unbound.homelab.local {
+    reverse_proxy {$UNBOUND:IP}:{$UNBOUND_PORT}
+}
+
+# PiHole
+pihole.homelab.local {
+    reverse_proxy {$PIHOLE_IP}:{$PIHOLE_PORT}
+}
+
+# Caddy
+caddy.homelab.local {
+    reverse_proxy {$CADDY_IP}:{$CADDY_PORT}
+}
+
+# SABnzbd
+sabnzbd.homelab.local {
+    reverse_proxy {$SABNZBD_IP}:${SABNZBD_PORT}
+}
+
+# qBittorrent
+qbittorrent.homelab.local {
+    reverse_proxy {$QBITTORRENT_IP}:{$QBITTORRENT_PORT}
+}
+
+# Notifiarr
+notifiarr.homelab.local {
+    reverse_proxy {$NOTIFIARR_IP}:{$NOTIFIARR_PORT}
+}
+
+# Homepage
+homepage.homelab.local {
+    reverse_proxy {$HOMEPAGE_IP}:{$HOMEPAGE_PORT}
+}
+
+# Home Assistant
+homeassistant.homelab.local {
+    reverse_proxy {$HOMEASSISTANT_IP}:{$HOMEASSISTANT_PORT}
+}
+
+# Hoarder
+hoarder.homelab.local {
+    reverse_proxy {$HOARDER_IP}:{$HOARDER_PORT}
+}
+
+# Tandoor
+tandoor.homelab.local {
+    reverse_proxy {$TANDOOR_IP}:{$TANDOOR_PORT}
+}
+
+# LazyLibrarian
+lazylibrarian.homelab.local {
+    reverse_proxy {$LAZYLIBRARIAN_IP}:{$LAZYLIBRARIAN_PORT}
+}
+
+# Jellyfin
+jellyfin.homelab.local {
+    reverse_proxy {$JELLYFIN_IP}:{$JELLYFIN_PORT}
+}
+
+# Prowlarr
+prowlarr.homelab.local {
+    reverse_proxy {$PROWLARR_IP}:{$PROWLARR_PORT}
+}
+
+# Jellyseerr
+jellyseerr.homelab.local {
+    reverse_proxy {$JELLYSEERR_IP}:{$JELLYSEERR_PORT}
+}
+
+# Radarr
+radarr.homelab.local {
+    reverse_proxy {$RADARR_IP}:{$RADARR_PORT}
+}
+
+# Sonarr
+sonarr.homelab.local {
+    reverse_proxy {$SONARR_IP}:{$SONARR_PORT}
+}
+
+# Bazarr
+bazarr.homelab.local {
+    reverse_proxy {$BAZARR_IP}:{$BAZARR_PORT}
+}
+
+# Lidarr
+lidarr.homelab.local {
+    reverse_proxy {$LIDARR_IP}:{$LIDARR_PORT}
+}
+
+# Whisparr
+whisparr.homelab.local {
+    reverse_proxy {$WHISPARR_IP}:{$WHISPARR_PORT}
+}

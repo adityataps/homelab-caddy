@@ -12,4 +12,4 @@ fi
 export "$(grep -v '^#' .env | xargs)"
 
 # Start reverse-proxy
-caddy start || caddy reload
+caddy start || caddy reload --config /app/caddy/Caddyfile

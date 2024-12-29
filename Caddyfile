@@ -46,13 +46,7 @@ unraid.homelab.local {
 # WireGuard Dashboard
 wireguard.homelab.local {
 	tls internal
-	reverse_proxy {$WIREGUARD_IP}:{$WIREGUARD_DASHBOARD_PORT:10086}
-}
-
-# WireGuard VPN
-vpn.homelab.local {
-	tls internal
-	reverse_proxy {WIREGUARD_IP}:{$WIREGUARD_VPN_PORT}
+	reverse_proxy {$WIREGUARD_IP}:{$WIREGUARD_PORT:10086}
 }
 
 # Omada Controller

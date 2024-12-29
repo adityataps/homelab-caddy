@@ -38,9 +38,9 @@ unraid.homelab.local {
 
 ### PVE LXCs ##########
 
-# Wireguard
+# WireGuard Dashboard
 wireguard.homelab.local {
-    reverse_proxy {$WIREGUARD_IP}:{$WIREGUARD_PORT}
+    reverse_proxy {$WIREGUARD_IP}:{$WIREGUARD_PORT:10086}
 }
 
 # Omada Controller

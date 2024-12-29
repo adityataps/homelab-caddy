@@ -8,54 +8,54 @@
 
 # Gateway (Wired router)
 gateway.homelab.local {
-    reverse_proxy {$GATEWAY_IP}
+        reverse_proxy {$GATEWAY_IP}
 }
 
 # Access point (Wi-Fi router)
 wireless.homelab.local {
-    reverse_proxy {$WIRELESS_IP}
+        reverse_proxy {$WIRELESS_IP}
 }
 
 # Server rack managed switch
 switch.homelab.local {
-    reverse_proxy {$SWITCH_IP}
+        reverse_proxy {$SWITCH_IP}
 }
 
 ### Servers ##########
 
 # Proxmox VE
 pve.homelab.local {
-    reverse_proxy {$PVE_IP}:{$PVE_PORT:8006}
+        reverse_proxy {$PVE_IP}:{$PVE_PORT:8006}
 }
 
 # Unraid NAS
 unraid.homelab.local {
-    reverse_proxy {$UNRAID_IP}:{$UNRAID_PORT:443}
+        reverse_proxy {$UNRAID_IP}:{$UNRAID_PORT:443}
 
-    # Alternatively: uncomment to use Unraid's built-in reverse proxy:
-    # reverse_proxy {$UNRAID_HOSTNAME}
+        # Alternatively: uncomment to use Unraid's built-in reverse proxy:
+        # reverse_proxy {$UNRAID_HOSTNAME}
 }
 
 ### PVE LXCs ##########
 
 # WireGuard Dashboard
 wireguard.homelab.local {
-    reverse_proxy {$WIREGUARD_IP}:{$WIREGUARD_PORT:10086}
+        reverse_proxy {$WIREGUARD_IP}:{$WIREGUARD_PORT:10086}
 }
 
 # Omada Controller
 omada.homelab.local {
-    reverse_proxy {$OMADA_IP}:{$OMADA_PORT:8043}
+        reverse_proxy {$OMADA_IP}:{$OMADA_PORT:8043}
 }
 
 # Unbound DNS
 unbound.homelab.local {
-    reverse_proxy {$UNBOUND_IP}:{$UNBOUND_PORT}
+        reverse_proxy {$UNBOUND_IP}:{$UNBOUND_PORT}
 }
 
 # PiHole
 pihole.homelab.local {
-    reverse_proxy {$PIHOLE_IP}:{$PIHOLE_PORT:80}
+        reverse_proxy {$PIHOLE_IP}:{$PIHOLE_PORT:80}
 }
 
 ## Caddy
@@ -65,80 +65,80 @@ pihole.homelab.local {
 
 # SABnzbd
 sabnzbd.homelab.local {
-    reverse_proxy {$SABNZBD_IP}:${SABNZBD_PORT}
+        reverse_proxy {$SABNZBD_IP}:${SABNZBD_PORT}
 }
 
 # qBittorrent
 qbittorrent.homelab.local {
-    reverse_proxy {$QBITTORRENT_IP}:{$QBITTORRENT_PORT}
+        reverse_proxy {$QBITTORRENT_IP}:{$QBITTORRENT_PORT}
 }
 
 # Notifiarr
 notifiarr.homelab.local {
-    reverse_proxy {$NOTIFIARR_IP}:{$NOTIFIARR_PORT}
+        reverse_proxy {$NOTIFIARR_IP}:{$NOTIFIARR_PORT}
 }
 
 # Homepage
 homepage.homelab.local {
-    reverse_proxy {$HOMEPAGE_IP}:{$HOMEPAGE_PORT}
+        reverse_proxy {$HOMEPAGE_IP}:{$HOMEPAGE_PORT}
 }
 
 # Home Assistant
 homeassistant.homelab.local {
-    reverse_proxy {$HOMEASSISTANT_IP}:{$HOMEASSISTANT_PORT:8123}
+        reverse_proxy {$HOMEASSISTANT_IP}:{$HOMEASSISTANT_PORT:8123}
 }
 
 # Hoarder
 hoarder.homelab.local {
-    reverse_proxy {$HOARDER_IP}:{$HOARDER_PORT}
+        reverse_proxy {$HOARDER_IP}:{$HOARDER_PORT}
 }
 
 # Tandoor
 tandoor.homelab.local {
-    reverse_proxy {$TANDOOR_IP}:{$TANDOOR_PORT}
+        reverse_proxy {$TANDOOR_IP}:{$TANDOOR_PORT}
 }
 
 # LazyLibrarian
 lazylibrarian.homelab.local {
-    reverse_proxy {$LAZYLIBRARIAN_IP}:{$LAZYLIBRARIAN_PORT}
+        reverse_proxy {$LAZYLIBRARIAN_IP}:{$LAZYLIBRARIAN_PORT}
 }
 
 # Jellyfin
 jellyfin.homelab.local {
-    reverse_proxy {$JELLYFIN_IP}:{$JELLYFIN_PORT:8920}
+        reverse_proxy {$JELLYFIN_IP}:{$JELLYFIN_PORT:8920}
 }
 
 # Prowlarr
 prowlarr.homelab.local {
-    reverse_proxy {$PROWLARR_IP}:{$PROWLARR_PORT:9696}
+        reverse_proxy {$PROWLARR_IP}:{$PROWLARR_PORT:9696}
 }
 
 # Jellyseerr
 jellyseerr.homelab.local {
-    reverse_proxy {$JELLYSEERR_IP}:{$JELLYSEERR_PORT:5055}
+        reverse_proxy {$JELLYSEERR_IP}:{$JELLYSEERR_PORT:5055}
 }
 
 # Radarr
 radarr.homelab.local {
-    reverse_proxy {$RADARR_IP}:{$RADARR_PORT:7878}
+        reverse_proxy {$RADARR_IP}:{$RADARR_PORT:7878}
 }
 
 # Sonarr
 sonarr.homelab.local {
-    reverse_proxy {$SONARR_IP}:{$SONARR_PORT:8989}
+        reverse_proxy {$SONARR_IP}:{$SONARR_PORT:8989}
 }
 
 # Bazarr
 bazarr.homelab.local {
-    reverse_proxy {$BAZARR_IP}:{$BAZARR_PORT:6767}
+        reverse_proxy {$BAZARR_IP}:{$BAZARR_PORT:6767}
 }
 
 # Lidarr
 lidarr.homelab.local {
-    reverse_proxy {$LIDARR_IP}:{$LIDARR_PORT:8686}
+        reverse_proxy {$LIDARR_IP}:{$LIDARR_PORT:8686}
 }
 
 # Whisparr
 whisparr.homelab.local {
-    reverse_proxy {$WHISPARR_IP}:{$WHISPARR_PORT}
+        reverse_proxy {$WHISPARR_IP}:{$WHISPARR_PORT}
 }

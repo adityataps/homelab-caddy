@@ -50,7 +50,7 @@ omada.homelab.local {
 
 # Unbound DNS
 unbound.homelab.local {
-    reverse_proxy {$UNBOUND:IP}:{$UNBOUND_PORT}
+    reverse_proxy {$UNBOUND_IP}:{$UNBOUND_PORT}
 }
 
 # PiHole

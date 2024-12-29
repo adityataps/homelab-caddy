@@ -2,8 +2,5 @@
 
 set -e
 
-touch /app/caddy/.env
-source /app/caddy/.env
-
 # Start reverse-proxy
-caddy start || caddy reload --config /app/caddy/Caddyfile
+caddy start --config /app/caddy/Caddyfile --envfile /app/caddy/.env || caddy reload --config /app/caddy/Caddyfile --envfile /app/caddy/.env

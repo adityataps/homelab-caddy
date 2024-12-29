@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 # Check if .env exists
 if [ ! -f .env ]; then
    echo ".env file not found!"
@@ -10,4 +12,4 @@ fi
 export "$(grep -v '^#' .env | xargs)"
 
 # Start reverse-proxy
-caddy start
+caddy start || caddy reload

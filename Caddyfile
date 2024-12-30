@@ -73,7 +73,8 @@ pihole.homelab.local {
 
 ## Caddy
 caddy.homelab.local {
-    reverse_proxy 0.0.0.0:{$CADDY_PORT:2019}
+    tls internal
+    reverse_proxy localhost:{$CADDY_PORT:2019}
 }
 
 # SABnzbd

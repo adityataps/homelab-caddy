@@ -1,9 +1,8 @@
 ######################################
 ### Caddyfile for reverse proxying ###
 ######################################
-
 {
-    admin 0.0.0.0:{$CADDY_PORT:2019}
+	admin 0.0.0.0:{$CADDY_PORT:2019}
 }
 
 # TODO: Verify default ports
@@ -73,8 +72,7 @@ pihole.homelab.local {
 
 ## Caddy
 caddy.homelab.local {
-    tls internal
-    reverse_proxy localhost:{$CADDY_PORT:2019}
+	reverse_proxy localhost:{$CADDY_PORT:2019}
 }
 
 # SABnzbd

@@ -81,7 +81,7 @@ caddy.homelab.local {
 # SABnzbd
 sabnzbd.homelab.local {
 	tls internal
-	reverse_proxy {$SABNZBD_IP}:${SABNZBD_PORT}
+	reverse_proxy {$SABNZBD_IP}:{$SABNZBD_PORT:7777}
 }
 
 # qBittorrent

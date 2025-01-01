@@ -123,7 +123,7 @@ tandoor.homelab.local {
 # LazyLibrarian
 lazylibrarian.homelab.local {
 	tls internal
-	reverse_proxy {$LAZYLIBRARIAN_IP}:{$LAZYLIBRARIAN_PORT}
+	reverse_proxy {$LAZYLIBRARIAN_IP}:{$LAZYLIBRARIAN_PORT:5299}
 }
 
 # Jellyfin

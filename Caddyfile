@@ -141,7 +141,7 @@ lazylibrarian.homelab.local {
 # Jellyfin
 jellyfin.homelab.local {
 	tls internal
-	reverse_proxy {$JELLYFIN_IP}:{$JELLYFIN_PORT:8920}
+	reverse_proxy {$JELLYFIN_IP}:{$JELLYFIN_PORT:8096}
 }
 
 # Prowlarr

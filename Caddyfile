@@ -9,10 +9,16 @@
 
 ### Hardware ##########
 
-# Gateway (Wired router)
+# Internet gateway
 gateway.homelab.local {
 	tls internal
 	reverse_proxy {$GATEWAY_IP}
+}
+
+# Wired router
+router.homelab.local {
+	tls internal
+	reverse_proxy {$ROUTER_IP}
 }
 
 # Access point (Wi-Fi router)
@@ -29,12 +35,6 @@ switch.homelab.local {
 
 ### Servers ##########
 
-# Proxmox VE
-pve.homelab.local {
-	tls internal
-	reverse_proxy {$PVE_IP}:{$PVE_PORT:8006}
-}
-
 # Unraid NAS
 unraid.homelab.local {
 	tls internal
@@ -42,6 +42,18 @@ unraid.homelab.local {
 
 	# Alternatively: uncomment to use Unraid's built-in reverse proxy:
 	# reverse_proxy {$UNRAID_HOSTNAME}
+}
+
+# Proxmox VE
+pve.homelab.local {
+	tls internal
+	reverse_proxy {$PVE_IP}:{$PVE_PORT:8006}
+}
+
+# Netdata (Proxmox VE)
+netdata.homelab.local {
+	tls internal
+	reverse_proxy {$NETDATA_IP}:{$NETDATA_PORT:19999}
 }
 
 ### PVE LXCs ##########

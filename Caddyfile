@@ -132,10 +132,10 @@ tandoor.homelab.local {
 	reverse_proxy {$TANDOOR_IP}:{$TANDOOR_PORT}
 }
 
-# LazyLibrarian
-lazylibrarian.homelab.local {
+# Readarr
+readarr.homelab.local {
 	tls internal
-	reverse_proxy {$LAZYLIBRARIAN_IP}:{$LAZYLIBRARIAN_PORT:5299}
+	reverse_proxy {$READARR_IP}:{$READARR_PORT:8787}
 }
 
 # Jellyfin

@@ -138,6 +138,12 @@ readarr.homelab.local {
 	reverse_proxy {$READARR_IP}:{$READARR_PORT:8787}
 }
 
+# Calibre-Web
+calibre-web.homelab.local {
+    tls internal
+    reverse_proxy {$CALIBRE_WEB_IP}:{$CALIBRE_WEB_PORT:8083}
+}
+
 # Jellyfin
 jellyfin.homelab.local {
 	tls internal

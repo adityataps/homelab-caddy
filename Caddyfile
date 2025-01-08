@@ -64,6 +64,12 @@ wireguard.homelab.local {
 	reverse_proxy {$WIREGUARD_IP}:{$WIREGUARD_PORT:10086}
 }
 
+# WireGuard VPN
+vpn.homelab.local, {$WIREGUARD_FQDN:vpn.homelab.local} {
+	tls internal
+	reverse_proxy {$WIREGUARD_IP}:{$WIREGUARD_PORT:51820}
+}
+
 # Omada Controller
 omada.homelab.local {
 	tls internal
@@ -140,12 +146,12 @@ readarr.homelab.local {
 
 # Calibre-Web
 calibre-web.homelab.local {
-    tls internal
-    reverse_proxy {$CALIBRE_WEB_IP}:{$CALIBRE_WEB_PORT:8083}
+	tls internal
+	reverse_proxy {$CALIBRE_WEB_IP}:{$CALIBRE_WEB_PORT:8083}
 }
 
 # Jellyfin
-jellyfin.homelab.local {
+jellyfin.homelab.local, {$JELLYFIN_FQDN:jellyfin.homelab.local} {
 	tls internal
 	reverse_proxy {$JELLYFIN_IP}:{$JELLYFIN_PORT:8096}
 }
@@ -157,7 +163,7 @@ prowlarr.homelab.local {
 }
 
 # Jellyseerr
-jellyseerr.homelab.local {
+jellyseerr.homelab.local, {$JELLYSEERR_FQDN:jellyseerr.homelab.local} {
 	tls internal
 	reverse_proxy {$JELLYSEERR_IP}:{$JELLYSEERR_PORT:5055}
 }

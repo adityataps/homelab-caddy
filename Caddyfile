@@ -73,6 +73,7 @@ unbound.homelab.local {
 
 # PiHole
 pihole.homelab.local {
+  redir / /admin
 	reverse_proxy {$PIHOLE_IP}:{$PIHOLE_PORT:80}
 }
 

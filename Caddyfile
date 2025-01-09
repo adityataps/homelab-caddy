@@ -101,12 +101,12 @@ notifiarr.homelab.local {
 
 # PeaNUT
 peanut.homelab.local {
-	reverse_proxy {$PEANUT_IP}:{$PEANUT_PORT}
+	reverse_proxy {$PEANUT_IP}:{$PEANUT_PORT:3000}
 }
 
 # Homepage
 homepage.homelab.local {
-	reverse_proxy {$HOMEPAGE_IP}:{$HOMEPAGE_PORT}
+	reverse_proxy {$HOMEPAGE_IP}:{$HOMEPAGE_PORT:3000}
 }
 
 # Home Assistant

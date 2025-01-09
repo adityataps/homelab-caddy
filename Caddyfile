@@ -99,6 +99,11 @@ notifiarr.homelab.local {
 	reverse_proxy {$NOTIFIARR_IP}:{$NOTIFIARR_PORT}
 }
 
+# PeaNUT
+peanut.homelab.local {
+	reverse_proxy {$PEANUT_IP}:{$PEANUT_PORT}
+}
+
 # Homepage
 homepage.homelab.local {
 	reverse_proxy {$HOMEPAGE_IP}:{$HOMEPAGE_PORT}

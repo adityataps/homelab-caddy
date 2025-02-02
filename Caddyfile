@@ -63,7 +63,11 @@ vpn.homelab.local, {$WIREGUARD_FQDN:vpn.homelab.local} {
 
 # Omada Controller
 omada.homelab.local {
-	reverse_proxy {$OMADA_IP}:{$OMADA_PORT:8043}
+	reverse_proxy {$OMADA_IP}:{$OMADA_PORT:8043} {
+		transport http {
+			tls_insecure_skip_verify
+		}
+	}
 }
 
 # Unbound DNS
@@ -73,7 +77,7 @@ unbound.homelab.local {
 
 # PiHole
 pihole.homelab.local {
-  redir / /admin
+	redir / /admin
 	reverse_proxy {$PIHOLE_IP}:{$PIHOLE_PORT:80}
 }
 

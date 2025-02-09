@@ -7,7 +7,7 @@
 
 	crowdsec {
 		api_url http://localhost:8080
-		api_key MXjXtNbPgZZ6+sCrWjErmL0uKD5QIOs+dgLsTFMXidg
+		api_key {$CROWDSEC_API_KEY}
 		ticker_interval 15s
 		appsec_url http://localhost:7422
 		#disable_streaming

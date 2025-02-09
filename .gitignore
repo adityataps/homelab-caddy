@@ -1,2 +1,5 @@
 .idea/
 .env
+
+# xcaddy binary with crowdsec plugins
+caddy

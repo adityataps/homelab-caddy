@@ -5,6 +5,7 @@
 
 # Sourced from https://github.com/hslatman/caddy-crowdsec-bouncer.git
 xcaddy build \
- --with github.com/hslatman/caddy-crowdsec-bouncer/http \
- --with github.com/hslatman/caddy-crowdsec-bouncer/layer4 \
- --with github.com/hslatman/caddy-crowdsec-bouncer/appsec
+  --with github.com/hslatman/caddy-crowdsec-bouncer/http \
+  --with github.com/hslatman/caddy-crowdsec-bouncer/layer4 \
+  --with github.com/hslatman/caddy-crowdsec-bouncer/appsec \
+  --with github.com/mholt/caddy-l4

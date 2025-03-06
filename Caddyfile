@@ -130,21 +130,21 @@ pihole.homelab.local {
 	route {
 		crowdsec
 		redir / /admin
-		reverse_proxy https://{$PIHOLE_IP}:{$PIHOLE_PORT:443}
-		transport http {
-			tls_insecure_skip_verify
+		reverse_proxy https://{$PIHOLE_IP}:{$PIHOLE_PORT:443} {
+			transport http {
+				tls_insecure_skip_verify
+			}
 		}
-		tls
 	}
 }
 
-## Caddy
+# Caddy
 caddy.homelab.local {
 	route {
 		crowdsec
 		reverse_proxy localhost:{$CADDY_PORT:2019}
 		basic_auth {
-			{$CADDY_API_USERNAME} {$CADDY_API_HASHED_PASSWORD}
+			{$CADDY_API_USERNAME}{$CADDY_API_HASHED_PASSWORD}
 		}
 	}
 }
@@ -290,5 +290,17 @@ whisparr.homelab.local {
 	route {
 		crowdsec
 		reverse_proxy {$WHISPARR_IP}:{$WHISPARR_PORT}
+	}
+}
+
+# Crafty Controller
+crafty-controller.homelab.local {$CRAFTYCONTROLLER_FQDN:crafty-controller.homelab.local} {
+	route {
+		crowdsec
+		reverse_proxy {$CRAFTYCONTROLLER_IP}:{$CRAFTYCONTROLLER_PORT:8443} {
+			transport http {
+				tls_insecure_skip_verify
+			}
+		}
 	}
 }

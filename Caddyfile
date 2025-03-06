@@ -144,7 +144,7 @@ caddy.homelab.local {
 		crowdsec
 		reverse_proxy localhost:{$CADDY_PORT:2019}
 		basic_auth {
-			{$CADDY_API_USERNAME}{$CADDY_API_HASHED_PASSWORD}
+			{$CADDY_API_USERNAME} {$CADDY_API_HASHED_PASSWORD}
 		}
 	}
 }

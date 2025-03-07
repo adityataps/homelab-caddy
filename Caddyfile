@@ -294,7 +294,7 @@ whisparr.homelab.local {
 }
 
 # Crafty Controller
-crafty-controller.homelab.local {$CRAFTYCONTROLLER_FQDN:crafty-controller.homelab.local} {
+crafty-controller.homelab.local {
 	route {
 		crowdsec
 		reverse_proxy {$CRAFTYCONTROLLER_IP}:{$CRAFTYCONTROLLER_PORT:8443} {
@@ -302,5 +302,12 @@ crafty-controller.homelab.local {$CRAFTYCONTROLLER_FQDN:crafty-controller.homela
 				tls_insecure_skip_verify
 			}
 		}
+	}
+}
+
+{$MC_CRAFTYCONTROLLER_FQDN:mc.tapshalkar.com} {
+	route {
+		crowdsec
+		reverse_proxy {$CRAFTYCONTROLLER_IP}:{$MC_CRAFTYCONTROLLER_PORT:25565}
 	}
 }

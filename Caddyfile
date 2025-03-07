@@ -297,7 +297,7 @@ whisparr.homelab.local {
 crafty-controller.homelab.local {
 	route {
 		crowdsec
-		reverse_proxy {$CRAFTYCONTROLLER_IP}:{$CRAFTYCONTROLLER_PORT:8443} {
+		reverse_proxy https://{$CRAFTYCONTROLLER_IP}:{$CRAFTYCONTROLLER_PORT:8443} {
 			transport http {
 				tls_insecure_skip_verify
 			}
@@ -308,6 +308,6 @@ crafty-controller.homelab.local {
 {$MC_CRAFTYCONTROLLER_FQDN:mc.tapshalkar.com} {
 	route {
 		crowdsec
-		reverse_proxy {$CRAFTYCONTROLLER_IP}:{$MC_CRAFTYCONTROLLER_PORT:25565}
+		reverse_proxy https://{$CRAFTYCONTROLLER_IP}:{$MC_CRAFTYCONTROLLER_PORT:25565}
 	}
 }

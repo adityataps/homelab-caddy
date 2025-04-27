@@ -197,11 +197,11 @@ homeassistant.homelab.local {
 	}
 }
 
-# Hoarder
-hoarder.homelab.local {
+# Karakeep
+karakeep.homelab.local {
 	route {
 		crowdsec
-		reverse_proxy {$HOARDER_IP}:{$HOARDER_PORT}
+		reverse_proxy {KARAKEEP_IP}:{$KARAKEEP_PORT}
 	}
 }
 

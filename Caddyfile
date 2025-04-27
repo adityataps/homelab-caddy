@@ -201,7 +201,7 @@ homeassistant.homelab.local {
 karakeep.homelab.local {
 	route {
 		crowdsec
-		reverse_proxy {KARAKEEP_IP}:{$KARAKEEP_PORT}
+		reverse_proxy {KARAKEEP_IP}:{$KARAKEEP_PORT:3000}
 	}
 }
 
@@ -316,7 +316,7 @@ crafty-controller.homelab.local {
 jupyter.homelab.local {
 	route {
 		crowdsec
-	    redir / /lab
+		redir / /lab
 		reverse_proxy {$JUPYTERNOTEBOOK_IP}:{$JUPYTERNOTEBOOK_PORT:8888}
 	}
 }

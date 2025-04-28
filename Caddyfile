@@ -14,15 +14,25 @@
 		#enable_hard_fails
 	}
 
-	# layer4 {
-	#       localhost:4444 {
-	#               @crowdsec crowdsec	#               route @crowdsec {
-	#                       proxy {
-	#                               upstream localhost:6443
-	#                       }
-	#               }
-	#       }
-	# }
+	layer4 {
+		0.0.0.0:5432 {
+			route {
+				proxy upstream {$POSTGRESQL_IP}:{$POSTGRESQL_PORT:5432}
+			}
+		}
+
+		0.0.0.0:27017 {
+			route {
+				proxy upstream {$MONGODB_IP}:{$MONGODB_PORT:27017}
+			}
+		}
+
+		0.0.0.0:6379 {
+			route {
+				proxy upstream {$REDIS_IP}:{$REDIS_PORT:6379}
+			}
+		}
+	}
 }
 
 # TODO: Verify default ports
@@ -318,29 +328,5 @@ jupyter.homelab.local {
 		crowdsec
 		redir / /lab
 		reverse_proxy {$JUPYTERNOTEBOOK_IP}:{$JUPYTERNOTEBOOK_PORT:8888}
-	}
-}
-
-# PostgreSQL
-postgresql.homelab.local {
-	route {
-		crowdsec
-		reverse_proxy {$POSTGRESQL_IP}:{$POSTGRESQL_PORT:5432}
-	}
-}
-
-# MongoDB
-mongodb.homelab.local {
-	route {
-		crowdsec
-		reverse_proxy {$MONGODB_IP}:{$MONGODB_PORT:27017}
-	}
-}
-
-# Redis
-redis.homelab.local {
-	route {
-		crowdsec
-		reverse_proxy {$REDIS_IP}:{$REDIS_PORT:6379}
 	}
 }

@@ -321,12 +321,3 @@ crafty-controller.homelab.local {
 		reverse_proxy https://{$CRAFTYCONTROLLER_IP}:{$MC_CRAFTYCONTROLLER_PORT:25565}
 	}
 }
-
-# Jupyter Notebook
-jupyter.homelab.local {
-	route {
-		crowdsec
-		redir / /lab
-		reverse_proxy {$JUPYTERNOTEBOOK_IP}:{$JUPYTERNOTEBOOK_PORT:8888}
-	}
-}

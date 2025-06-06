@@ -303,6 +303,13 @@ whisparr.homelab.local {
 	}
 }
 
+stirling-pdf.homelab.local {
+	route {
+		crowdsec
+		reverse_proxy {$STIRLINGPDF_IP}:{$STIRLINGPDF_PORT:8080}
+	}
+}
+
 # Crafty Controller
 crafty-controller.homelab.local {
 	route {

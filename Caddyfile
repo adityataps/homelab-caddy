@@ -328,3 +328,19 @@ crafty-controller.homelab.local {
 		reverse_proxy https://{$CRAFTYCONTROLLER_IP}:{$MC_CRAFTYCONTROLLER_PORT:25565}
 	}
 }
+
+# Ollama
+ollama.homelab.local {
+	route {
+		crowdsec
+		reverse_proxy {$OLLAMA_IP}:{$OLLAMA_PORT:11434}
+	}
+}
+
+# Open WebUI
+openwebui.homelab.local {
+	route {
+		crowdsec
+		reverse_proxy {$OPENWEBUI_IP}:{$OPENWEBUI_PORT:8080}
+	}
+}

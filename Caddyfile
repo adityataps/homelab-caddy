@@ -344,3 +344,35 @@ openwebui.homelab.local {
 		reverse_proxy {$OPENWEBUI_IP}:{$OPENWEBUI_PORT:8080}
 	}
 }
+
+# Immich
+immich.homelab.local {
+	route {
+		crowdsec
+		reverse_proxy {$IMMICH_IP}:{$IMMICH_PORT:2283}
+	}
+}
+
+# Grafana
+grafana.homelab.local {
+	route {
+		crowdsec
+		reverse_proxy {$GRAFANA_IP}:{$GRAFANA_PORT:3000}
+	}
+}
+
+# Prometheus
+prometheus.homelab.local {
+	route {
+		crowdsec
+		reverse_proxy {$PROMETHEUS_IP}:{$PROMETHEUS_PORT:9090}
+	}
+}
+
+# Promtheus PVE Exporter
+prometheus-pve.homelab.local {
+	route {
+		crowdsec
+		reverse_proxy {$PROMETHEUSPVE_IP}:{$PROMETHEUSPVE_PORT:9221}
+	}
+}

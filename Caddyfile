@@ -250,11 +250,11 @@ readarr.homelab.local {
     }
 }
 
-# Calibre-Web
-calibre-web.homelab.local {
+# BookLore
+booklore.homelab.local {
     route {
         crowdsec
-        reverse_proxy {$CALIBRE_WEB_IP}:{$CALIBRE_WEB_PORT:8083}
+        reverse_proxy {$BOOKLORE_IP}:{$BOOKLORE_PORT:6060}
     }
 }
 

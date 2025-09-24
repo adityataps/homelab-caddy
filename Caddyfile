@@ -154,6 +154,14 @@ caddy.homelab.local {
     }
 }
 
+# Backrest
+backrest.homelab.local {
+    route {
+        crowdsec
+        reverse_proxy {$BACKREST_IP}:{$BACKREST_PORT:9898}
+    }
+}
+
 # MySpeed
 myspeed.homelab.local {
     route {

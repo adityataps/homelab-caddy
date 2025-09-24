@@ -372,6 +372,14 @@ openwebui.homelab.local {
     }
 }
 
+# n8n
+n8n.homelab.local {
+    route {
+        crowdsec
+        reverse_proxy {$N8N_IP}:{$N8N_PORT:5678}
+    }
+}
+
 # Immich
 immich.homelab.local {
     route {

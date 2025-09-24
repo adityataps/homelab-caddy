@@ -250,11 +250,11 @@ tandoor.homelab.local {
     }
 }
 
-# Readarr
-readarr.homelab.local {
+# LazyLibrarian
+lazylibrarian.homelab.local {
     route {
         crowdsec
-        reverse_proxy {$READARR_IP}:{$READARR_PORT:8787}
+        reverse_proxy {$LAZYLIBRARIAN_IP}:{$LAZYLIBRARIAN_PORT:5299}
     }
 }
 

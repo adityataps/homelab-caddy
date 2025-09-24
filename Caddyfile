@@ -226,6 +226,14 @@ homeassistant.homelab.local {
     }
 }
 
+# Homebridge
+homebridge.homelab.local {
+    route {
+        crowdsec
+        reverse_proxy {$HOMEBRIDGE_IP}:{$HOMEBRIDGE_PORT:8581}
+    }
+}
+
 # Karakeep
 karakeep.homelab.local {
     route {

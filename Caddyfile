@@ -190,7 +190,7 @@ sabnzbd.homelab.local {
 qbittorrent.homelab.local {
     route {
         crowdsec
-        reverse_proxy {$QBITTORRENT_IP}:{$QBITTORRENT_PORT}
+        reverse_proxy {$QBITTORRENT_IP}:{$QBITTORRENT_PORT:8090}
     }
 }
 
@@ -198,7 +198,7 @@ qbittorrent.homelab.local {
 notifiarr.homelab.local {
     route {
         crowdsec
-        reverse_proxy {$NOTIFIARR_IP}:{$NOTIFIARR_PORT}
+        reverse_proxy {$NOTIFIARR_IP}:{$NOTIFIARR_PORT:5454}
     }
 }
 
@@ -246,7 +246,7 @@ karakeep.homelab.local {
 tandoor.homelab.local {
     route {
         crowdsec
-        reverse_proxy {$TANDOOR_IP}:{$TANDOOR_PORT}
+        reverse_proxy {$TANDOOR_IP}:{$TANDOOR_PORT:8002}
     }
 }
 
@@ -326,7 +326,7 @@ lidarr.homelab.local {
 whisparr.homelab.local {
     route {
         crowdsec
-        reverse_proxy {$WHISPARR_IP}:{$WHISPARR_PORT}
+        reverse_proxy {$WHISPARR_IP}:{$WHISPARR_PORT:6969}
     }
 }
 

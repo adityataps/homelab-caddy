@@ -154,6 +154,14 @@ caddy.homelab.local {
     }
 }
 
+# MySpeed
+myspeed.homelab.local {
+    route {
+        crowdsec
+        reverse_proxy {$MYSPEED_IP}:{$MYSPEED_PORT:5216}
+    }
+}
+
 # SABnzbd
 sabnzbd.homelab.local {
     route {

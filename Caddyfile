@@ -162,6 +162,14 @@ backrest.homelab.local {
     }
 }
 
+# Proxmox Backup Server
+pbs.homelab.local {
+    route {
+        crowdsec
+        reverse_proxy {$PBS_IP}:{$PBS_PORT:8007}
+    }
+}
+
 # MySpeed
 myspeed.homelab.local {
     route {

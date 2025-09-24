@@ -130,14 +130,6 @@ omada.homelab.local {
     }
 }
 
-# Unbound DNS
-unbound.homelab.local {
-    route {
-        crowdsec
-        reverse_proxy {$UNBOUND_IP}:{$UNBOUND_PORT}
-    }
-}
-
 # PiHole
 pihole.homelab.local {
     route {

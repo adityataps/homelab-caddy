@@ -45,21 +45,24 @@
 # Internet gateway
 gateway.homelab.local {
     route {
-        crowdsec reverse_proxy {$GATEWAY_IP}
+        crowdsec
+        reverse_proxy {$GATEWAY_IP}
     }
 }
 
 # Wired router
 router.homelab.local {
     route {
-        crowdsec reverse_proxy {$ROUTER_IP}
+        crowdsec
+        reverse_proxy {$ROUTER_IP}
     }
 }
 
 # Access point (Wi-Fi router)
 wireless.homelab.local {
     route {
-        crowdsec reverse_proxy {$WIRELESS_IP}
+        crowdsec
+        reverse_proxy {$WIRELESS_IP}
     }
 }
 
@@ -122,7 +125,7 @@ vpn.homelab.local {$WIREGUARD_FQDN:vpn.homelab.local} {
 omada.homelab.local {
     route {
         crowdsec
-        reverse_proxy {$OMADA_IP}:{$OMADA_PORT:8043} {
+        reverse_proxy https://{$OMADA_IP}:{$OMADA_PORT:8043} {
             transport http {
                 tls_insecure_skip_verify
             }

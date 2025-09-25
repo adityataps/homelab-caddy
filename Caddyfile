@@ -113,13 +113,13 @@ wireguard.homelab.local {
 	}
 }
 
-# WireGuard VPN
-vpn.homelab.local {$WIREGUARD_FQDN:vpn.homelab.local} {
-	route {
-		crowdsec
-		reverse_proxy {$WIREGUARD_IP}:{$WIREGUARD_PORT:51820}
-	}
-}
+## WireGuard VPN
+#vpn.homelab.local {$WIREGUARD_FQDN:vpn.homelab.local} {
+#	route {
+#		crowdsec
+#		reverse_proxy {$WIREGUARD_IP}:{$WIREGUARD_PORT:51820}
+#	}
+#}
 
 # Omada Controller
 omada.homelab.local {

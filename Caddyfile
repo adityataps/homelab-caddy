@@ -2,40 +2,40 @@
 ### Caddyfile for reverse proxying ###
 ######################################
 {
-    debug
-    admin 0.0.0.0:{$CADDY_PORT:2019}
+	debug
+	admin 0.0.0.0:{$CADDY_PORT:2019}
 
-    crowdsec {
-        api_url http://localhost:8080
-        api_key env.CROWDSEC_API_KEY
-        ticker_interval 15s
-        appsec_url http://localhost:7422
-        #disable_streaming
-        #enable_hard_fails
-    }
+	crowdsec {
+		api_url http://localhost:8080
+		api_key env.CROWDSEC_API_KEY
+		ticker_interval 15s
+		appsec_url http://localhost:7422
+		#disable_streaming
+		#enable_hard_fails
+	}
 
-    layer4 {
-        0.0.0.0:15672 {
-            route {
-                proxy upstream {$RABBITMQ_IP}:{$RABBITMQ_PORT:15672}
-            }
-        }
-        0.0.0.0:5432 {
-            route {
-                proxy upstream {$POSTGRESQL_IP}:{$POSTGRESQL_PORT:5432}
-            }
-        }
-        0.0.0.0:27017 {
-            route {
-                proxy upstream {$MONGODB_IP}:{$MONGODB_PORT:27017}
-            }
-        }
-        0.0.0.0:6379 {
-            route {
-                proxy upstream {$REDIS_IP}:{$REDIS_PORT:6379}
-            }
-        }
-    }
+	layer4 {
+		0.0.0.0:15672 {
+			route {
+				proxy upstream {$RABBITMQ_IP}:{$RABBITMQ_PORT:15672}
+			}
+		}
+		0.0.0.0:5432 {
+			route {
+				proxy upstream {$POSTGRESQL_IP}:{$POSTGRESQL_PORT:5432}
+			}
+		}
+		0.0.0.0:27017 {
+			route {
+				proxy upstream {$MONGODB_IP}:{$MONGODB_PORT:27017}
+			}
+		}
+		0.0.0.0:6379 {
+			route {
+				proxy upstream {$REDIS_IP}:{$REDIS_PORT:6379}
+			}
+		}
+	}
 }
 
 # TODO: Verify default ports
@@ -44,373 +44,373 @@
 
 # Internet gateway
 gateway.homelab.local {
-    route {
-        crowdsec
-        reverse_proxy {$GATEWAY_IP}
-    }
+	route {
+		crowdsec
+		reverse_proxy {$GATEWAY_IP}
+	}
 }
 
 # Wired router
 router.homelab.local {
-    route {
-        crowdsec
-        reverse_proxy {$ROUTER_IP}
-    }
+	route {
+		crowdsec
+		reverse_proxy {$ROUTER_IP}
+	}
 }
 
 # Access point (Wi-Fi router)
 wireless.homelab.local {
-    route {
-        crowdsec
-        reverse_proxy {$WIRELESS_IP}
-    }
+	route {
+		crowdsec
+		reverse_proxy {$WIRELESS_IP}
+	}
 }
 
 # Server rack managed switch
 switch.homelab.local {
-    route {
-        crowdsec
-        reverse_proxy {$SWITCH_IP}
-    }
+	route {
+		crowdsec
+		reverse_proxy {$SWITCH_IP}
+	}
 }
 
 ### Servers ##########
 
 # Unraid NAS
 unraid.homelab.local {
-    route {
-        crowdsec
-        reverse_proxy {$UNRAID_IP}:{$UNRAID_PORT:443}
+	route {
+		crowdsec
+		reverse_proxy {$UNRAID_IP}:{$UNRAID_PORT:443}
 
-        # Alternatively: uncomment to use Unraid's built-in reverse proxy:
-        # reverse_proxy {$UNRAID_HOSTNAME}
-    }
+		# Alternatively: uncomment to use Unraid's built-in reverse proxy:
+		# reverse_proxy {$UNRAID_HOSTNAME}
+	}
 }
 
 # Proxmox VE
 pve.homelab.local {
-    route {
-        crowdsec
-        reverse_proxy {$PVE_IP}:{$PVE_PORT:8006}
-    }
+	route {
+		crowdsec
+		reverse_proxy {$PVE_IP}:{$PVE_PORT:8006}
+	}
 }
 
 # Netdata (Proxmox VE)
 netdata.homelab.local {
-    route {
-        crowdsec
-        reverse_proxy {$NETDATA_IP}:{$NETDATA_PORT:19999}
-    }
+	route {
+		crowdsec
+		reverse_proxy {$NETDATA_IP}:{$NETDATA_PORT:19999}
+	}
 }
 
 ### PVE LXCs ##########
 
 # WireGuard Dashboard
 wireguard.homelab.local {
-    route {
-        crowdsec
-        reverse_proxy {$WIREGUARD_IP}:{$WIREGUARD_PORT:10086}
-    }
+	route {
+		crowdsec
+		reverse_proxy {$WIREGUARD_IP}:{$WIREGUARD_PORT:10086}
+	}
 }
 
 # WireGuard VPN
 vpn.homelab.local {$WIREGUARD_FQDN:vpn.homelab.local} {
-    route {
-        crowdsec
-        reverse_proxy {$WIREGUARD_IP}:{$WIREGUARD_PORT:51820}
-    }
+	route {
+		crowdsec
+		reverse_proxy {$WIREGUARD_IP}:{$WIREGUARD_PORT:51820}
+	}
 }
 
 # Omada Controller
 omada.homelab.local {
-    route {
-        crowdsec
-        reverse_proxy https://{$OMADA_IP}:{$OMADA_PORT:8043} {
-            transport http {
-                tls_insecure_skip_verify
-            }
-        }
-    }
+	route {
+		crowdsec
+		reverse_proxy https://{$OMADA_IP}:{$OMADA_PORT:8043} {
+			transport http {
+				tls_insecure_skip_verify
+			}
+		}
+	}
 }
 
 # PiHole
 pihole.homelab.local {
-    route {
-        crowdsec
-        redir / /admin
-        reverse_proxy https://{$PIHOLE_IP}:{$PIHOLE_PORT:443} {
-            transport http {
-                tls_insecure_skip_verify
-            }
-        }
-    }
+	route {
+		crowdsec
+		redir / /admin
+		reverse_proxy https://{$PIHOLE_IP}:{$PIHOLE_PORT:443} {
+			transport http {
+				tls_insecure_skip_verify
+			}
+		}
+	}
 }
 
 # Caddy
 caddy.homelab.local {
-    route {
-        crowdsec
-        reverse_proxy localhost:{$CADDY_PORT:2019}
-        basic_auth {
-            {$CADDY_API_USERNAME} {$CADDY_API_HASHED_PASSWORD}
-        }
-    }
+	route {
+		crowdsec
+		reverse_proxy localhost:{$CADDY_PORT:2019}
+		basic_auth {
+			{$CADDY_API_USERNAME} {$CADDY_API_HASHED_PASSWORD}
+		}
+	}
 }
 
 # Backrest
 backrest.homelab.local {
-    route {
-        crowdsec
-        reverse_proxy {$BACKREST_IP}:{$BACKREST_PORT:9898}
-    }
+	route {
+		crowdsec
+		reverse_proxy {$BACKREST_IP}:{$BACKREST_PORT:9898}
+	}
 }
 
 # Proxmox Backup Server
 pbs.homelab.local {
-    route {
-        crowdsec
-        reverse_proxy {$PBS_IP}:{$PBS_PORT:8007}
-    }
+	route {
+		crowdsec
+		reverse_proxy {$PBS_IP}:{$PBS_PORT:8007}
+	}
 }
 
 # MySpeed
 myspeed.homelab.local {
-    route {
-        crowdsec
-        reverse_proxy {$MYSPEED_IP}:{$MYSPEED_PORT:5216}
-    }
+	route {
+		crowdsec
+		reverse_proxy {$MYSPEED_IP}:{$MYSPEED_PORT:5216}
+	}
 }
 
 # SABnzbd
 sabnzbd.homelab.local {
-    route {
-        crowdsec
-        reverse_proxy {$SABNZBD_IP}:{$SABNZBD_PORT:7777}
-    }
+	route {
+		crowdsec
+		reverse_proxy {$SABNZBD_IP}:{$SABNZBD_PORT:7777}
+	}
 }
 
 # qBittorrent
 qbittorrent.homelab.local {
-    route {
-        crowdsec
-        reverse_proxy {$QBITTORRENT_IP}:{$QBITTORRENT_PORT:8090}
-    }
+	route {
+		crowdsec
+		reverse_proxy {$QBITTORRENT_IP}:{$QBITTORRENT_PORT:8090}
+	}
 }
 
 # Notifiarr
 notifiarr.homelab.local {
-    route {
-        crowdsec
-        reverse_proxy {$NOTIFIARR_IP}:{$NOTIFIARR_PORT:5454}
-    }
+	route {
+		crowdsec
+		reverse_proxy {$NOTIFIARR_IP}:{$NOTIFIARR_PORT:5454}
+	}
 }
 
 # PeaNUT
 peanut.homelab.local {
-    route {
-        crowdsec
-        reverse_proxy {$PEANUT_IP}:{$PEANUT_PORT:3000}
-    }
+	route {
+		crowdsec
+		reverse_proxy {$PEANUT_IP}:{$PEANUT_PORT:3000}
+	}
 }
 
 # Homepage
 homepage.homelab.local {
-    route {
-        crowdsec
-        reverse_proxy {$HOMEPAGE_IP}:{$HOMEPAGE_PORT:3000}
-    }
+	route {
+		crowdsec
+		reverse_proxy {$HOMEPAGE_IP}:{$HOMEPAGE_PORT:3000}
+	}
 }
 
 # Home Assistant
 homeassistant.homelab.local {
-    route {
-        crowdsec
-        reverse_proxy {$HOMEASSISTANT_IP}:{$HOMEASSISTANT_PORT:8123}
-    }
+	route {
+		crowdsec
+		reverse_proxy {$HOMEASSISTANT_IP}:{$HOMEASSISTANT_PORT:8123}
+	}
 }
 
 # Homebridge
 homebridge.homelab.local {
-    route {
-        crowdsec
-        reverse_proxy {$HOMEBRIDGE_IP}:{$HOMEBRIDGE_PORT:8581}
-    }
+	route {
+		crowdsec
+		reverse_proxy {$HOMEBRIDGE_IP}:{$HOMEBRIDGE_PORT:8581}
+	}
 }
 
 # Karakeep
 karakeep.homelab.local {
-    route {
-        crowdsec
-        reverse_proxy {KARAKEEP_IP}:{$KARAKEEP_PORT:3000}
-    }
+	route {
+		crowdsec
+		reverse_proxy {KARAKEEP_IP}:{$KARAKEEP_PORT:3000}
+	}
 }
 
 # Tandoor
 tandoor.homelab.local {
-    route {
-        crowdsec
-        reverse_proxy {$TANDOOR_IP}:{$TANDOOR_PORT:8002}
-    }
+	route {
+		crowdsec
+		reverse_proxy {$TANDOOR_IP}:{$TANDOOR_PORT:8002}
+	}
 }
 
 # LazyLibrarian
 lazylibrarian.homelab.local {
-    route {
-        crowdsec
-        reverse_proxy {$LAZYLIBRARIAN_IP}:{$LAZYLIBRARIAN_PORT:5299}
-    }
+	route {
+		crowdsec
+		reverse_proxy {$LAZYLIBRARIAN_IP}:{$LAZYLIBRARIAN_PORT:5299}
+	}
 }
 
 # BookLore
 booklore.homelab.local {
-    route {
-        crowdsec
-        reverse_proxy {$BOOKLORE_IP}:{$BOOKLORE_PORT:6060}
-    }
+	route {
+		crowdsec
+		reverse_proxy {$BOOKLORE_IP}:{$BOOKLORE_PORT:6060}
+	}
 }
 
 # Jellyfin
 jellyfin.homelab.local {$JELLYFIN_FQDN:jellyfin.homelab.local} {
-    route {
-        crowdsec
-        reverse_proxy {$JELLYFIN_IP}:{$JELLYFIN_PORT:8096}
-    }
+	route {
+		crowdsec
+		reverse_proxy {$JELLYFIN_IP}:{$JELLYFIN_PORT:8096}
+	}
 }
 
 # Prowlarr
 prowlarr.homelab.local {
-    route {
-        crowdsec
-        reverse_proxy {$PROWLARR_IP}:{$PROWLARR_PORT:9696}
-    }
+	route {
+		crowdsec
+		reverse_proxy {$PROWLARR_IP}:{$PROWLARR_PORT:9696}
+	}
 }
 
 # Jellyseerr
 jellyseerr.homelab.local {$JELLYSEERR_FQDN:jellyseerr.homelab.local} {
-    route {
-        crowdsec
-        reverse_proxy {$JELLYSEERR_IP}:{$JELLYSEERR_PORT:5055}
-    }
+	route {
+		crowdsec
+		reverse_proxy {$JELLYSEERR_IP}:{$JELLYSEERR_PORT:5055}
+	}
 }
 
 # Radarr
 radarr.homelab.local {
-    route {
-        crowdsec
-        reverse_proxy {$RADARR_IP}:{$RADARR_PORT:7878}
-    }
+	route {
+		crowdsec
+		reverse_proxy {$RADARR_IP}:{$RADARR_PORT:7878}
+	}
 }
 
 # Sonarr
 sonarr.homelab.local {
-    route {
-        crowdsec
-        reverse_proxy {$SONARR_IP}:{$SONARR_PORT:8989}
-    }
+	route {
+		crowdsec
+		reverse_proxy {$SONARR_IP}:{$SONARR_PORT:8989}
+	}
 }
 
 # Bazarr
 bazarr.homelab.local {
-    route {
-        crowdsec
-        reverse_proxy {$BAZARR_IP}:{$BAZARR_PORT:6767}
-    }
+	route {
+		crowdsec
+		reverse_proxy {$BAZARR_IP}:{$BAZARR_PORT:6767}
+	}
 }
 
 # Lidarr
 lidarr.homelab.local {
-    route {
-        crowdsec
-        reverse_proxy {$LIDARR_IP}:{$LIDARR_PORT:8686}
-    }
+	route {
+		crowdsec
+		reverse_proxy {$LIDARR_IP}:{$LIDARR_PORT:8686}
+	}
 }
 
 # Whisparr
 whisparr.homelab.local {
-    route {
-        crowdsec
-        reverse_proxy {$WHISPARR_IP}:{$WHISPARR_PORT:6969}
-    }
+	route {
+		crowdsec
+		reverse_proxy {$WHISPARR_IP}:{$WHISPARR_PORT:6969}
+	}
 }
 
 stirling-pdf.homelab.local {
-    route {
-        crowdsec
-        reverse_proxy {$STIRLINGPDF_IP}:{$STIRLINGPDF_PORT:8080}
-    }
+	route {
+		crowdsec
+		reverse_proxy {$STIRLINGPDF_IP}:{$STIRLINGPDF_PORT:8080}
+	}
 }
 
 # Crafty Controller
 crafty-controller.homelab.local {
-    route {
-        crowdsec
-        reverse_proxy https://{$CRAFTYCONTROLLER_IP}:{$CRAFTYCONTROLLER_PORT:8443} {
-            transport http {
-                tls_insecure_skip_verify
-            }
-        }
-    }
+	route {
+		crowdsec
+		reverse_proxy https://{$CRAFTYCONTROLLER_IP}:{$CRAFTYCONTROLLER_PORT:8443} {
+			transport http {
+				tls_insecure_skip_verify
+			}
+		}
+	}
 }
 
 {$MC_CRAFTYCONTROLLER_FQDN:mc.tapshalkar.com} {
-    route {
-        crowdsec
-        reverse_proxy https://{$CRAFTYCONTROLLER_IP}:{$MC_CRAFTYCONTROLLER_PORT:25565}
-    }
+	route {
+		crowdsec
+		reverse_proxy https://{$CRAFTYCONTROLLER_IP}:{$MC_CRAFTYCONTROLLER_PORT:25565}
+	}
 }
 
 # Ollama
 ollama.homelab.local {
-    route {
-        crowdsec
-        reverse_proxy {$OLLAMA_IP}:{$OLLAMA_PORT:11434}
-    }
+	route {
+		crowdsec
+		reverse_proxy {$OLLAMA_IP}:{$OLLAMA_PORT:11434}
+	}
 }
 
 # Open WebUI
 openwebui.homelab.local {
-    route {
-        crowdsec
-        reverse_proxy {$OPENWEBUI_IP}:{$OPENWEBUI_PORT:8080}
-    }
+	route {
+		crowdsec
+		reverse_proxy {$OPENWEBUI_IP}:{$OPENWEBUI_PORT:8080}
+	}
 }
 
 # n8n
 n8n.homelab.local {
-    route {
-        crowdsec
-        reverse_proxy {$N8N_IP}:{$N8N_PORT:5678}
-    }
+	route {
+		crowdsec
+		reverse_proxy {$N8N_IP}:{$N8N_PORT:5678}
+	}
 }
 
 # Immich
 immich.homelab.local {
-    route {
-        crowdsec
-        reverse_proxy {$IMMICH_IP}:{$IMMICH_PORT:2283}
-    }
+	route {
+		crowdsec
+		reverse_proxy {$IMMICH_IP}:{$IMMICH_PORT:2283}
+	}
 }
 
 # Grafana
 grafana.homelab.local {
-    route {
-        crowdsec
-        reverse_proxy {$GRAFANA_IP}:{$GRAFANA_PORT:3000}
-    }
+	route {
+		crowdsec
+		reverse_proxy {$GRAFANA_IP}:{$GRAFANA_PORT:3000}
+	}
 }
 
 # Prometheus
 prometheus.homelab.local {
-    route {
-        crowdsec
-        reverse_proxy {$PROMETHEUS_IP}:{$PROMETHEUS_PORT:9090}
-    }
+	route {
+		crowdsec
+		reverse_proxy {$PROMETHEUS_IP}:{$PROMETHEUS_PORT:9090}
+	}
 }
 
 # Promtheus PVE Exporter
 prometheus-pve.homelab.local {
-    route {
-        crowdsec
-        reverse_proxy {$PROMETHEUSPVE_IP}:{$PROMETHEUSPVE_PORT:9221}
-    }
+	route {
+		crowdsec
+		reverse_proxy {$PROMETHEUSPVE_IP}:{$PROMETHEUSPVE_PORT:9221}
+	}
 }

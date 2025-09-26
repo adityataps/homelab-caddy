@@ -91,7 +91,11 @@ unraid.homelab.local {
 pve.homelab.local {
 	route {
 		crowdsec
-		reverse_proxy {$PVE_IP}:{$PVE_PORT:8006}
+		reverse_proxy {$PVE_IP}:{$PVE_PORT:8006} {
+			transport http {
+				tls_insecure_skip_verify
+			}
+		}
 	}
 }
 

@@ -169,7 +169,11 @@ backrest.homelab.local {
 pbs.homelab.local {
 	route {
 		crowdsec
-		reverse_proxy {$PBS_IP}:{$PBS_PORT:8007}
+		reverse_proxy {$PBS_IP}:{$PBS_PORT:8007} {
+			transport http {
+				tls_insecure_skip_verify
+			}
+		}
 	}
 }
 

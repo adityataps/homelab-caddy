@@ -80,7 +80,11 @@ switch.homelab.local {
 unraid.homelab.local {
 	route {
 		crowdsec
-		reverse_proxy {$UNRAID_IP}:{$UNRAID_PORT:443}
+		reverse_proxy {$UNRAID_IP}:{$UNRAID_PORT:443} {
+			transport http {
+				tls_insecure_skip_verify
+			}
+		}
 
 		# Alternatively: uncomment to use Unraid's built-in reverse proxy:
 		# reverse_proxy {$UNRAID_HOSTNAME}

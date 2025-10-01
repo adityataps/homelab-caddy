@@ -245,7 +245,11 @@ homeassistant.homelab.local {
 homeassistant-portainer.homelab.local {
 	route {
 		crowdsec
-		reverse_proxy {$HOMEASSISTANT_IP}:{$HOMEASSISTANT_PORTAINER_PORT:9443}
+		reverse_proxy {$HOMEASSISTANT_IP}:{$HOMEASSISTANT_PORTAINER_PORT:9443} {
+			transport http {
+				tls_insecure_skip_verify
+			}
+		}
 	}
 }
 

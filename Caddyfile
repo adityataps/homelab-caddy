@@ -241,6 +241,14 @@ homeassistant.homelab.local {
 	}
 }
 
+# Home Assistant Portainer
+homeassistant-portainer.homelab.local {
+	route {
+		crowdsec
+		reverse_proxy {$HOMEASSISTANT_IP}:{$HOMEASSISTANT_PORTAINER_PORT:9443}
+	}
+}
+
 # Homebridge
 homebridge.homelab.local {
 	route {

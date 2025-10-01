@@ -19,6 +19,7 @@
 192.168.0.134 peanut.homelab.local
 192.168.0.134 homepage.homelab.local
 192.168.0.134 homeassistant.homelab.local
+192.168.0.134 homeassistant-portainer.homelab.local
 192.168.0.134 homebridge.homelab.local
 192.168.0.134 karakeep.homelab.local
 192.168.0.134 tandoor.homelab.local

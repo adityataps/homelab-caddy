@@ -435,7 +435,7 @@ prometheus.homelab.local {
 prometheus-pve.homelab.local {
 	route {
 		crowdsec
-		redir / /pve?target={PVE_IP}
+		redir / /pve?target={$PVE_IP}
 		reverse_proxy {$PROMETHEUSPVE_IP}:{$PROMETHEUSPVE_PORT:9221}
 	}
 }

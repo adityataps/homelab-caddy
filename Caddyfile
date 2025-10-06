@@ -439,3 +439,10 @@ prometheus-pve.homelab.local {
 		reverse_proxy {$PROMETHEUSPVE_IP}:{$PROMETHEUSPVE_PORT:9221}
 	}
 }
+
+prometheus-alertmanager.homelab.local {
+    route {
+		crowdsec
+        reverse_proxy {$PROMETHEUSALERTMANAGER_IP}:{$PROMETHEUSALERTMANAGER_PORT:9093}
+    }
+}

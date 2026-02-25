@@ -309,11 +309,11 @@ prowlarr.homelab.local {
 	}
 }
 
-# Jellyseerr
-jellyseerr.homelab.local {$JELLYSEERR_FQDN:jellyseerr.homelab.local} {
+# Seerr
+seerr.homelab.local {$SEERR_FQDN:seerr.homelab.local} {
 	route {
 		crowdsec
-		reverse_proxy {$JELLYSEERR_IP}:{$JELLYSEERR_PORT:5055}
+		reverse_proxy {$SEERR_IP}:{$SEERR_PORT:5055}
 	}
 }
 

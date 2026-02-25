@@ -27,7 +27,7 @@
 192.168.0.134 booklore.homelab.local
 192.168.0.134 jellyfin.homelab.local
 192.168.0.134 prowlarr.homelab.local
-192.168.0.134 jellyseerr.homelab.local
+192.168.0.134 seerr.homelab.local
 192.168.0.134 radarr.homelab.local
 192.168.0.134 sonarr.homelab.local
 192.168.0.134 bazarr.homelab.local

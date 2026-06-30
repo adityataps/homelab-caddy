@@ -449,8 +449,8 @@ prometheus-pve.homelab.local {
 }
 
 prometheus-alertmanager.homelab.local {
-    route {
+	route {
 		crowdsec
-        reverse_proxy {$PROMETHEUSALERTMANAGER_IP}:{$PROMETHEUSALERTMANAGER_PORT:9093}
-    }
+		reverse_proxy {$PROMETHEUSALERTMANAGER_IP}:{$PROMETHEUSALERTMANAGER_PORT:9093}
+	}
 }

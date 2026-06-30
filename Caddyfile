@@ -185,6 +185,14 @@ pbs.homelab.local {
 	}
 }
 
+# RustDesk Server
+rustdesk.homelab.local {
+	route {
+		crowdsec
+		reverse_proxy {$RUSTDESK_IP}:{$RUSTDESK_PORT:21114}
+	}
+}
+
 # MySpeed
 myspeed.homelab.local {
 	route {

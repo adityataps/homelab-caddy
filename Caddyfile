@@ -454,3 +454,11 @@ prometheus-alertmanager.homelab.local {
 		reverse_proxy {$PROMETHEUSALERTMANAGER_IP}:{$PROMETHEUSALERTMANAGER_PORT:9093}
 	}
 }
+
+# Ironclaw
+ironclaw.homelab.local {$IRONCLAW_FQDN:ironclaw.homelab.local} {
+	route {
+		crowdsec
+		reverse_proxy {$IRONCLAW_IP}:{$IRONCLAW_PORT:3000}
+	}
+}

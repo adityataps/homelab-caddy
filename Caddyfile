@@ -185,6 +185,14 @@ pbs.homelab.local {
 	}
 }
 
+# DDNS-Updater
+ddns-updater.homelab.local {
+	route {
+		crowdsec
+		reverse_proxy {DDNSUPDATER_IP}:{DDNSUPDATER_PORT:8000}
+	}
+}
+
 # RustDesk Server
 rustdesk.homelab.local {
 	route {

@@ -462,3 +462,11 @@ prometheus-alertmanager.homelab.local {
 		reverse_proxy {$PROMETHEUSALERTMANAGER_IP}:{$PROMETHEUSALERTMANAGER_PORT:9093}
 	}
 }
+
+# OpenClaw
+openclaw.homelab.local {
+	route {
+		crowdsec
+		reverse_proxy {$OPENCLAW_IP}:{$OPENCLAW_PORT:18789}
+	}
+}

@@ -301,11 +301,11 @@ lazylibrarian.homelab.local {
 	}
 }
 
-# BookLore
-booklore.homelab.local {
+# BookOrbit
+bookorbit.homelab.local {
 	route {
 		crowdsec
-		reverse_proxy {$BOOKLORE_IP}:{$BOOKLORE_PORT:6060}
+		reverse_proxy {$BOOKORBIT_IP}:{$BOOKORBIT_PORT:3000}
 	}
 }
 

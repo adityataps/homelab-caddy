@@ -26,7 +26,7 @@
 192.168.0.134 karakeep.homelab.local
 192.168.0.134 tandoor.homelab.local
 192.168.0.134 lazylibrarian.homelab.local
-192.168.0.134 booklore.homelab.local
+192.168.0.134 bookorbit.homelab.local
 192.168.0.134 jellyfin.homelab.local
 192.168.0.134 prowlarr.homelab.local
 192.168.0.134 seerr.homelab.local

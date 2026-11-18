@@ -38,6 +38,23 @@
 	}
 }
 
+### Snippets ##########
+
+# authentik forward auth via the embedded outpost (CT 145). Use inside a
+# site's `route` block, after `crowdsec` and before `reverse_proxy`:
+#   import authentik                 protect the whole site
+#   import authentik /api/* /feed/*  protect all but these paths (only for
+#                                    paths the app already gates with an API key)
+(authentik) {
+	reverse_proxy /outpost.goauthentik.io/* {$AUTHENTIK_IP}:{$AUTHENTIK_PORT:9000}
+	@authentik_protected not path /outpost.goauthentik.io/* {args[:]}
+	forward_auth @authentik_protected {$AUTHENTIK_IP}:{$AUTHENTIK_PORT:9000} {
+		uri /outpost.goauthentik.io/auth/caddy
+		copy_headers X-Authentik-Username X-Authentik-Groups X-Authentik-Entitlements X-Authentik-Email X-Authentik-Name X-Authentik-Uid X-Authentik-Jwt X-Authentik-Meta-Jwks X-Authentik-Meta-Outpost X-Authentik-Meta-Provider X-Authentik-Meta-App X-Authentik-Meta-Version
+		trusted_proxies private_ranges
+	}
+}
+
 # TODO: Verify default ports
 
 ### Hardware ##########
@@ -107,6 +124,7 @@ pve.homelab.local {
 netdata.homelab.local {
 	route {
 		crowdsec
+		import authentik
 		reverse_proxy {$NETDATA_IP}:{$NETDATA_PORT:19999}
 	}
 }
@@ -165,10 +183,19 @@ caddy.homelab.local {
 	}
 }
 
+# authentik (SSO), LAN/VPN only. Forward-auth portal and OIDC issuer.
+authentik.homelab.local {
+	route {
+		crowdsec
+		reverse_proxy {$AUTHENTIK_IP}:{$AUTHENTIK_PORT:9000}
+	}
+}
+
 # Backrest
 backrest.homelab.local {
 	route {
 		crowdsec
+		import authentik
 		reverse_proxy {$BACKREST_IP}:{$BACKREST_PORT:9898}
 	}
 }
@@ -189,7 +216,8 @@ pbs.homelab.local {
 ddns-updater.homelab.local {
 	route {
 		crowdsec
-		reverse_proxy {DDNSUPDATER_IP}:{DDNSUPDATER_PORT:8000}
+		import authentik
+		reverse_proxy {$DDNSUPDATER_IP}:{$DDNSUPDATER_PORT:8000}
 	}
 }
 
@@ -205,6 +233,7 @@ rustdesk.homelab.local {
 myspeed.homelab.local {
 	route {
 		crowdsec
+		import authentik
 		reverse_proxy {$MYSPEED_IP}:{$MYSPEED_PORT:5216}
 	}
 }
@@ -213,6 +242,7 @@ myspeed.homelab.local {
 sabnzbd.homelab.local {
 	route {
 		crowdsec
+		import authentik /api /api/* /sabnzbd/api /sabnzbd/api/*
 		reverse_proxy {$SABNZBD_IP}:{$SABNZBD_PORT:7777}
 	}
 }
@@ -221,6 +251,7 @@ sabnzbd.homelab.local {
 qbittorrent.homelab.local {
 	route {
 		crowdsec
+		import authentik
 		reverse_proxy {$QBITTORRENT_IP}:{$QBITTORRENT_PORT:8090}
 	}
 }
@@ -229,6 +260,7 @@ qbittorrent.homelab.local {
 notifiarr.homelab.local {
 	route {
 		crowdsec
+		import authentik
 		reverse_proxy {$NOTIFIARR_IP}:{$NOTIFIARR_PORT:5454}
 	}
 }
@@ -237,6 +269,7 @@ notifiarr.homelab.local {
 peanut.homelab.local {
 	route {
 		crowdsec
+		import authentik
 		reverse_proxy {$PEANUT_IP}:{$PEANUT_PORT:3000}
 	}
 }
@@ -245,6 +278,7 @@ peanut.homelab.local {
 homepage.homelab.local {
 	route {
 		crowdsec
+		import authentik
 		reverse_proxy {$HOMEPAGE_IP}:{$HOMEPAGE_PORT:3000}
 	}
 }
@@ -281,7 +315,7 @@ homebridge.homelab.local {
 karakeep.homelab.local {
 	route {
 		crowdsec
-		reverse_proxy {KARAKEEP_IP}:{$KARAKEEP_PORT:3000}
+		reverse_proxy {$KARAKEEP_IP}:{$KARAKEEP_PORT:3000}
 	}
 }
 
@@ -321,6 +355,8 @@ jellyfin.homelab.local {$JELLYFIN_FQDN:jellyfin.homelab.local} {
 prowlarr.homelab.local {
 	route {
 		crowdsec
+		# /<indexer id>/api and /download are the Torznab/Newznab proxies the *arrs pull from
+		import authentik /api/* /*/api /*/download
 		reverse_proxy {$PROWLARR_IP}:{$PROWLARR_PORT:9696}
 	}
 }
@@ -337,6 +373,7 @@ seerr.homelab.local {$SEERR_FQDN:seerr.homelab.local} {
 radarr.homelab.local {
 	route {
 		crowdsec
+		import authentik /api/* /feed/*
 		reverse_proxy {$RADARR_IP}:{$RADARR_PORT:7878}
 	}
 }
@@ -345,6 +382,7 @@ radarr.homelab.local {
 sonarr.homelab.local {
 	route {
 		crowdsec
+		import authentik /api/* /feed/*
 		reverse_proxy {$SONARR_IP}:{$SONARR_PORT:8989}
 	}
 }
@@ -353,6 +391,7 @@ sonarr.homelab.local {
 bazarr.homelab.local {
 	route {
 		crowdsec
+		import authentik /api/*
 		reverse_proxy {$BAZARR_IP}:{$BAZARR_PORT:6767}
 	}
 }
@@ -361,6 +400,7 @@ bazarr.homelab.local {
 lidarr.homelab.local {
 	route {
 		crowdsec
+		import authentik /api/* /feed/*
 		reverse_proxy {$LIDARR_IP}:{$LIDARR_PORT:8686}
 	}
 }
@@ -369,6 +409,7 @@ lidarr.homelab.local {
 whisparr.homelab.local {
 	route {
 		crowdsec
+		import authentik /api/* /feed/*
 		reverse_proxy {$WHISPARR_IP}:{$WHISPARR_PORT:6969}
 	}
 }
@@ -376,6 +417,7 @@ whisparr.homelab.local {
 stirling-pdf.homelab.local {
 	route {
 		crowdsec
+		import authentik
 		reverse_proxy {$STIRLINGPDF_IP}:{$STIRLINGPDF_PORT:8080}
 	}
 }
@@ -443,6 +485,7 @@ grafana.homelab.local {
 prometheus.homelab.local {
 	route {
 		crowdsec
+		import authentik
 		reverse_proxy {$PROMETHEUS_IP}:{$PROMETHEUS_PORT:9090}
 	}
 }
@@ -451,6 +494,7 @@ prometheus.homelab.local {
 prometheus-pve.homelab.local {
 	route {
 		crowdsec
+		import authentik
 		redir / /pve?target={$PVE_IP}
 		reverse_proxy {$PROMETHEUSPVE_IP}:{$PROMETHEUSPVE_PORT:9221}
 	}
@@ -459,12 +503,21 @@ prometheus-pve.homelab.local {
 prometheus-alertmanager.homelab.local {
 	route {
 		crowdsec
+		import authentik
 		reverse_proxy {$PROMETHEUSALERTMANAGER_IP}:{$PROMETHEUSALERTMANAGER_PORT:9093}
 	}
 }
 
 # OpenClaw
 openclaw.homelab.local {
+	# Long-lived leaf signed by the root: the OpenClaw Mac app pins the exact
+	# leaf fingerprint, and the default ~12h internal certs break that pin.
+	tls {
+		issuer internal {
+			lifetime 365d
+			sign_with_root
+		}
+	}
 	route {
 		crowdsec
 		reverse_proxy {$OPENCLAW_IP}:{$OPENCLAW_PORT:18789}

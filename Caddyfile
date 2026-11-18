@@ -508,19 +508,20 @@ prometheus-alertmanager.homelab.local {
 	}
 }
 
-# OpenClaw
+# OpenClaw + Hermes Agent moved to the Mac Studio (see ### Mac Studio). The old
+# names redirect there; WebSocket clients don't follow redirects, so point
+# them at openclaw.macstudio.local directly.
 openclaw.homelab.local {
-	# Long-lived leaf signed by the root: the OpenClaw Mac app pins the exact
-	# leaf fingerprint, and the default ~12h internal certs break that pin.
-	tls {
-		issuer internal {
-			lifetime 365d
-			sign_with_root
-		}
-	}
 	route {
 		crowdsec
-		reverse_proxy {$OPENCLAW_IP}:{$OPENCLAW_PORT:18789}
+		redir https://openclaw.macstudio.local{uri} 302
+	}
+}
+
+hermes.homelab.local {
+	route {
+		crowdsec
+		redir https://hermes.macstudio.local{uri} 302
 	}
 }
 

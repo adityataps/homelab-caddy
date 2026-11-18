@@ -48,3 +48,6 @@
 192.168.0.134 prometheus-alertmanager.homelab.local
 192.168.0.134 openclaw.homelab.local
 192.168.0.134 authentik.homelab.local
+192.168.0.134 openclaw.macstudio.local
+192.168.0.134 hermes.macstudio.local
+192.168.0.134 ollama.macstudio.local

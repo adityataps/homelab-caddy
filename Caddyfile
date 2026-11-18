@@ -523,3 +523,39 @@ openclaw.homelab.local {
 		reverse_proxy {$OPENCLAW_IP}:{$OPENCLAW_PORT:18789}
 	}
 }
+
+### Mac Studio ##########
+
+# OpenClaw gateway (Mac Studio). The gateway must bind beyond loopback and
+# trust Caddy as a proxy (gateway.trustedProxies: ["192.168.0.134"]).
+openclaw.macstudio.local {
+	# Long-lived leaf signed by the root: the OpenClaw Mac app pins the exact
+	# leaf fingerprint, and the default ~12h internal certs break that pin.
+	tls {
+		issuer internal {
+			lifetime 365d
+			sign_with_root
+		}
+	}
+	route {
+		crowdsec
+		reverse_proxy {$MACSTUDIO_IP}:{$MACSTUDIO_OPENCLAW_PORT:18789}
+	}
+}
+
+# Hermes Agent dashboard (Mac Studio). Non-loopback binds require Hermes's
+# own auth provider (password or OAuth).
+hermes.macstudio.local {
+	route {
+		crowdsec
+		reverse_proxy {$MACSTUDIO_IP}:{$MACSTUDIO_HERMES_PORT:9119}
+	}
+}
+
+# Ollama (Mac Studio); the PVE instance stays at ollama.homelab.local
+ollama.macstudio.local {
+	route {
+		crowdsec
+		reverse_proxy {$MACSTUDIO_IP}:{$MACSTUDIO_OLLAMA_PORT:11434}
+	}
+}
